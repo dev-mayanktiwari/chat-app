@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import LoginModal from "./LoginModal";
 
 const Navbar = () => {
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
+  const openLoginModal = () => setIsLoginModalOpen(true);
+  const closeLoginModal = () => setIsLoginModalOpen(false);
+
   return (
     <nav className="bg-white shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -25,9 +31,7 @@ const Navbar = () => {
             <Link href="/about" className="text-gray-700 hover:text-blue-600">
               About
             </Link>
-            <Button asChild>
-              <Link href="/login">Login</Link>
-            </Button>
+            <Button onClick={openLoginModal}>Login</Button>
           </div>
           <div className="flex items-center sm:hidden">
             <Button variant="ghost" size="icon">
@@ -49,6 +53,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
     </nav>
   );
 };
