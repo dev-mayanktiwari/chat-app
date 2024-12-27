@@ -1,7 +1,21 @@
-import { AuthOptions } from "next-auth";
+import { AuthOptions, ISODateString } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
-const authOptions: AuthOptions = {
+export interface CustomSession {
+  user?: CustomUser;
+  expires?: ISODateString;
+}
+
+export interface CustomUser {
+  id?: string | null;
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
+  provider?: string | null;
+  token?: string | null;
+}
+
+export const authOptions: AuthOptions = {
   pages: {
     signIn: "/",
   },
@@ -19,5 +33,3 @@ const authOptions: AuthOptions = {
     }),
   ],
 };
-
-export default authOptions;
