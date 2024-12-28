@@ -4,8 +4,9 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import LoginModal from "./LoginModal";
+import { CustomUser } from "@/app/api/auth/[...nextauth]/options";
 
-const Navbar = () => {
+const Navbar = ({ user }: { user?: CustomUser }) => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   const openLoginModal = () => setIsLoginModalOpen(true);
@@ -55,7 +56,13 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
+      {!user ? (
+        <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
+      ) : (
+        <Link href="/dashboard">
+          <Button variant="outline">Dashboard</Button>
+        </Link>
+      )}
     </nav>
   );
 };
