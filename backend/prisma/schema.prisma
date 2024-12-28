@@ -18,7 +18,9 @@ model User {
   name      String
   email     String   @unique
   provider  String
-  image     String
+  image     String?
   oauth_id  String
   createdAt DateTime @default(now())
+
+  @@map("users")
 }
