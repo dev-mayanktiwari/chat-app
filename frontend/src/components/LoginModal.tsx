@@ -8,6 +8,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { ChromeIcon as Google } from "lucide-react";
+import { signIn } from "next-auth/react";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -16,8 +17,10 @@ interface LoginModalProps {
 
 const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
   const handleGoogleLogin = () => {
-    // Implement Google login logic here
-    console.log("Google login clicked");
+    signIn("google", {
+      callbackUrl: "/dashboard",
+      redirect: true,
+    });
   };
 
   return (
