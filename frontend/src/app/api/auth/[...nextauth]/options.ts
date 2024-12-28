@@ -1,3 +1,4 @@
+import { config } from "@/app/config";
 import { login } from "@/lib/api";
 import { Account, AuthOptions, ISODateString } from "next-auth";
 import { JWT } from "next-auth/jwt";
@@ -21,6 +22,22 @@ export const authOptions: AuthOptions = {
   pages: {
     signIn: "/",
   },
+  providers: [
+    GoogleProvider({
+      clientId: config.get("GOOGLE_CLIENT_ID") || "",
+      clientSecret: config.get("GOOGLE_CLIENT_SECRET") || "",
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
+    }),
+  ],
+
+  secret: config.get("NEXTAUTH_SECRET"),
+
   callbacks: {
     async signIn({
       user,
@@ -30,9 +47,6 @@ export const authOptions: AuthOptions = {
       account: Account | null;
     }) {
       try {
-        console.log("The user data is", user);
-        console.log("The account data is", account);
-
         const payload = {
           email: user.email,
           name: user.name,
@@ -42,6 +56,7 @@ export const authOptions: AuthOptions = {
         };
 
         const { data } = await login(payload);
+
         user.id = data?.user?.id.toString();
         user.token = data?.user?.token;
         user.provider = data?.user?.provider;
@@ -63,6 +78,7 @@ export const authOptions: AuthOptions = {
       session.user = token.user as CustomUser;
       return session;
     },
+
     async jwt({ token, user }) {
       if (user) {
         token.user = user;
@@ -70,17 +86,4 @@ export const authOptions: AuthOptions = {
       return token;
     },
   },
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      authorization: {
-        params: {
-          prompt: "consent",
-          access_type: "offline",
-          response_type: "code",
-        },
-      },
-    }),
-  ],
 };
