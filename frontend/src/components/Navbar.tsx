@@ -1,70 +1,36 @@
-"use client";
-
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import LoginModal from "./LoginModal";
-import { CustomUser } from "@/app/api/auth/[...nextauth]/options";
+import { getServerSession } from "next-auth";
+import {
+  authOptions,
+  CustomSession,
+  CustomUser,
+} from "@/app/api/auth/[...nextauth]/options";
+import LogoutDropdown from "./LogoutDropdown";
+import LoginButton from "./LoginButton";
 
-const Navbar = ({ user }: { user?: CustomUser }) => {
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-
-  const openLoginModal = () => setIsLoginModalOpen(true);
-  const closeLoginModal = () => setIsLoginModalOpen(false);
+const Navbar = async () => {
+  const session: CustomSession | null = await getServerSession(authOptions);
+  const user = session?.user as CustomUser | undefined;
 
   return (
     <nav className="bg-white shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex-shrink-0 flex items-center">
+        <div className="flex justify-between items-center h-16">
+          <div className="flex-shrink-0">
             <Link href="/" className="text-2xl font-bold text-blue-600">
               SpeedPost Chat
             </Link>
           </div>
-          <div className="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-8">
-            <Link
-              href="/features"
-              className="text-gray-700 hover:text-blue-600"
-            >
-              Features
-            </Link>
-            <Link href="/pricing" className="text-gray-700 hover:text-blue-600">
-              Pricing
-            </Link>
-            <Link href="/about" className="text-gray-700 hover:text-blue-600">
-              About
-            </Link>
+          <div className="flex items-center">
             {!user ? (
-              <Button onClick={openLoginModal}>Login</Button>
+              <LoginButton />
             ) : (
-              <Link href="/dashboard">
-                <Button variant="outline">Dashboard</Button>
-              </Link>
+              <LogoutDropdown name={user?.name!} image={user?.image!} />
             )}
-          </div>
-          <div className="flex items-center sm:hidden">
-            <Button variant="ghost" size="icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                className="h-6 w-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </Button>
           </div>
         </div>
       </div>
-      {!user && (
-        <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
-      )}
     </nav>
   );
 };
