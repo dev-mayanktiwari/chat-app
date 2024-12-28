@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,9 +18,8 @@ interface LoginModalProps {
 }
 
 const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
-  const handleGoogleLogin = async () => {
-    console.log("Inside here");
-    await signIn("google", {
+  const handleGoogleLogin = () => {
+    signIn("google", {
       callbackUrl: "/dashboard",
       redirect: true,
     });
