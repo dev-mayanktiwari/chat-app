@@ -31,7 +31,7 @@ export default {
       };
 
       const token = quicker.createToken(JWTPayload);
-      return res.status(200).json({ token: `Bearer ${token}` });
+      return res.status(200).json({ token: `Bearer ${token}`, ...findUser });
     } catch (error) {
       console.error("Login error:", error);
       return res.status(500).json({ message: "Internal server error" });
