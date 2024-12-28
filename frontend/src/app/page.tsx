@@ -4,11 +4,14 @@ import HeroSection from "@/components/HeroSection";
 import FeatureSection from "@/components/FeatureSection";
 import CallToAction from "@/components/CallToAction";
 import Footer from "@/components/Footer";
+import { getServerSession } from "next-auth";
+import { authOptions, CustomSession } from "./api/auth/[...nextauth]/options";
 
-export default function Home() {
+export default async function Home() {
+  const session: CustomSession | null = await getServerSession(authOptions);
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      <Navbar user={session?.user} />
       <main className="flex-grow">
         <HeroSection />
         <FeatureSection />
