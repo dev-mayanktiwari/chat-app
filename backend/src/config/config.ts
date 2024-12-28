@@ -4,6 +4,7 @@ dotenv.config();
 
 const _config = {
   PORT: process.env.PORT,
+  JWT_SECRET: process.env.JWT_SECRET,
 };
 
 export const config = {
