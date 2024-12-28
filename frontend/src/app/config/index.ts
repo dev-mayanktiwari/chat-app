@@ -1,3 +1,4 @@
+import { API_URL } from "@/lib/apiEndpoints";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -8,6 +9,8 @@ const _config = {
   NEXT_PUBLIC_BACKEND_URL: process.env.NEXT_PUBLIC_BACKEND_URL,
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+  API_URL: process.env.NEXT_PUBLIC_API_URL,
+  BACKEND_URL: process.env.NEXT_PUBLIC_BACKEND_URL,
 };
 
 export const config = {
