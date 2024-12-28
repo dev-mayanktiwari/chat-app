@@ -1,5 +1,12 @@
-import Env from "./env";
+import axios from "axios";
+import { LOGIN_URL } from "./apiEndpoints";
 
-export const BASE_URL = Env.BACKEND_URL;
-export const API_URL = `${BASE_URL}/API_URL`;
-export const LOGIN = `${API_URL}/auth/login`;
+export const login = (payload: any) => {
+  try {
+    const response = axios.post(LOGIN_URL, payload);
+    return response;
+  } catch (error) {
+    console.error("Login error:", error);
+    throw error;
+  }
+};
