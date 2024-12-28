@@ -24,7 +24,7 @@ const features = [
 
 const FeatureSection = () => {
   return (
-    <section className="bg-white py-20 sm:py-32">
+    <section className="py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:text-center">
           <h2 className="text-base text-blue-600 font-semibold tracking-wide uppercase">
@@ -39,7 +39,7 @@ const FeatureSection = () => {
           </p>
         </div>
 
-        <div className="mt-10">
+        <div className="mt-10 space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
           <dl className="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
             {features.map((feature) => (
               <div key={feature.name} className="relative">
