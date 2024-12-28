@@ -16,8 +16,9 @@ interface LoginModalProps {
 }
 
 const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
-  const handleGoogleLogin = () => {
-    signIn("google", {
+  const handleGoogleLogin = async () => {
+    console.log("Inside here");
+    await signIn("google", {
       callbackUrl: "/dashboard",
       redirect: true,
     });

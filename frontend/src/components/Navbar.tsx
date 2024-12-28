@@ -34,7 +34,13 @@ const Navbar = ({ user }: { user?: CustomUser }) => {
             <Link href="/about" className="text-gray-700 hover:text-blue-600">
               About
             </Link>
-            <Button onClick={openLoginModal}>Login</Button>
+            {!user ? (
+              <Button onClick={openLoginModal}>Login</Button>
+            ) : (
+              <Link href="/dashboard">
+                <Button variant="outline">Dashboard</Button>
+              </Link>
+            )}
           </div>
           <div className="flex items-center sm:hidden">
             <Button variant="ghost" size="icon">
@@ -56,12 +62,8 @@ const Navbar = ({ user }: { user?: CustomUser }) => {
           </div>
         </div>
       </div>
-      {!user ? (
+      {!user && (
         <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
-      ) : (
-        <Link href="/dashboard">
-          <Button variant="outline">Dashboard</Button>
-        </Link>
       )}
     </nav>
   );
