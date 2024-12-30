@@ -3,6 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import { config } from "./config/config";
 import authRouter from "./router/authRouter";
+import chatRouter from "./router/chatRouter";
 const app: Application = express();
 const PORT = config.get("PORT");
 

@@ -1,8 +1,8 @@
 import { Router } from "express";
 import chatGroupController from "../controllers/chatGroupController";
 
-const authRouter = Router();
+const chatRouter = Router();
 
-authRouter.post("/chat-group", chatGroupController.store as any);
+chatRouter.post("/chat-group", chatGroupController.store as any);
 
-export default authRouter;
+export default chatRouter;
