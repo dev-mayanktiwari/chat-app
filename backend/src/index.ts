@@ -18,6 +18,7 @@ app.get("/health", (req: Request, res: Response) => {
 });
 
 app.use("/api/v1/auth", authRouter as any);
+app.use("/api/v1/chat", chatRouter as any);
 app.listen(PORT, () => {
   console.log(`The server is running on PORT ${PORT}`);
 });
