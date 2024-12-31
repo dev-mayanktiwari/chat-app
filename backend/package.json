@@ -7,7 +7,7 @@
     "test": "jest",
     "build": "npx tsc",
     "start": "npm run build && node dist/index.js",
-    "dev": "nodemon dist/index.js",
+    "dev": "npx tsc && nodemon dist/index.js",
     "watch": "tsc -w",
     "server": "concurrently \"npm run watch\" \"npm run dev\""
   },
