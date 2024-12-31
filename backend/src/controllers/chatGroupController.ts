@@ -37,4 +37,19 @@ export default {
       return res.status(500).json({ message: "Internal server error" });
     }
   },
+
+  show: async (req: Request, res: Response) => {
+    try {
+      const chatGroupId = req.params.id;
+
+      const chatGroup = await chatRoomDBServices.getChatroom(chatGroupId);
+
+      return res
+        .status(200)
+        .json({ message: "Chatgroup fetched successfully", data: chatGroup });
+    } catch (error) {
+      console.error("Chat group show error:", error);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  },
 };
