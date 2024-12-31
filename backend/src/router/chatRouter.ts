@@ -10,4 +10,10 @@ chatRouter.post(
   chatGroupController.store as any
 );
 
+chatRouter.get(
+  "/chat-group",
+  authMiddleware as any,
+  chatGroupController.index as any
+);
+
 export default chatRouter;
