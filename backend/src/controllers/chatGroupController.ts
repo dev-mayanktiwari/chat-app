@@ -73,4 +73,19 @@ export default {
       return res.status(500).json({ message: "Internal server error" });
     }
   },
+
+  destroy: async (req: Request, res: Response) => {
+    try {
+      const chatGroupId = req.params.id;
+
+      await chatRoomDBServices.deleteChatgroup(chatGroupId);
+
+      return res.json(201).json({
+        message: "Chatgroup deleted successfully",
+      });
+    } catch (error) {
+      console.error("Chat group delete update error:", error);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  },
 };
