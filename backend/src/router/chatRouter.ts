@@ -29,7 +29,7 @@ chatRouter.put(
 );
 
 chatRouter.delete(
-  "/chat-group",
+  "/chat-group/:id",
   authMiddleware as any,
   chatGroupController.destroy as any
 );
