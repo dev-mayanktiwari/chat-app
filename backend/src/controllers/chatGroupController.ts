@@ -21,4 +21,20 @@ export default {
       return res.status(500).json({ message: "Internal server error" });
     }
   },
+
+  index: async (request: Request, res: Response) => {
+    try {
+      const req = request as IAuthenticatedRequest;
+      const user = req.authenticatedUser;
+
+      const chatGroups = await chatRoomDBServices.getChatrooms(Number(user.id));
+
+      return res
+        .status(200)
+        .json({ message: "Chatgroups fetched successfully", data: chatGroups });
+    } catch (error) {
+      console.error("Chat group index error:", error);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  },
 };
