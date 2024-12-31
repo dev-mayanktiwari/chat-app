@@ -52,4 +52,25 @@ export default {
       return res.status(500).json({ message: "Internal server error" });
     }
   },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const { body } = req;
+      const chatGroupId = req.params.id;
+
+      const updatedChatgroup = await chatRoomDBServices.updateChatgroup(
+        body.title,
+        body.passcode,
+        chatGroupId
+      );
+
+      return res.json(201).json({
+        message: "Chatgroup updated successfully",
+        data: updatedChatgroup,
+      });
+    } catch (error) {
+      console.error("Chat group update error:", error);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  },
 };
