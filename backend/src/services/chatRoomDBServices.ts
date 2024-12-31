@@ -22,4 +22,12 @@ export default {
       },
     });
   },
+
+  getChatroom: (chatGroupId: string) => {
+    return prisma.chatGroup.findUnique({
+      where: {
+        id: chatGroupId,
+      },
+    });
+  },
 };
