@@ -20,6 +20,13 @@ export default {
       orderBy: {
         createdAt: "desc",
       },
+      select: {
+        id: true,
+        title: true,
+        passcode: false,
+        userId: true,
+        createdAt: true,
+      },
     });
   },
 
@@ -27,6 +34,13 @@ export default {
     return prisma.chatGroup.findUnique({
       where: {
         id: chatGroupId,
+      },
+      select: {
+        id: true,
+        title: true,
+        passcode: false,
+        userId: true,
+        createdAt: true,
       },
     });
   },
@@ -39,6 +53,13 @@ export default {
       },
       where: {
         id,
+      },
+      select: {
+        id: true,
+        title: true,
+        passcode: false,
+        userId: true,
+        createdAt: true,
       },
     });
   },
