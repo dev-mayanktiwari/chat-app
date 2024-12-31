@@ -16,4 +16,10 @@ chatRouter.get(
   chatGroupController.index as any
 );
 
+chatRouter.get(
+  "/chat-group/:id",
+  authMiddleware as any,
+  chatGroupController.show as any
+);
+
 export default chatRouter;
