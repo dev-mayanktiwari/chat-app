@@ -58,7 +58,7 @@ export const authOptions: AuthOptions = {
         const { data } = await login(payload);
 
         user.id = data?.user?.id.toString();
-        user.token = data?.user?.token;
+        user.token = data?.token;
         user.provider = data?.user?.provider;
 
         return true;
