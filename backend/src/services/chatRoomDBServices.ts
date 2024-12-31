@@ -42,4 +42,12 @@ export default {
       },
     });
   },
+
+  deleteChatgroup: (id: string) => {
+    return prisma.chatGroup.delete({
+      where: {
+        id,
+      },
+    });
+  },
 };
