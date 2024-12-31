@@ -22,4 +22,16 @@ chatRouter.get(
   chatGroupController.show as any
 );
 
+chatRouter.put(
+  "/chat-group/:id",
+  authMiddleware as any,
+  chatGroupController.update as any
+);
+
+chatRouter.delete(
+  "/chat-group",
+  authMiddleware as any,
+  chatGroupController.destroy as any
+);
+
 export default chatRouter;
