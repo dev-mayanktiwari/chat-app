@@ -30,4 +30,16 @@ export default {
       },
     });
   },
+
+  updateChatgroup: (title: string, passcode: string, id: string) => {
+    return prisma.chatGroup.update({
+      data: {
+        passcode,
+        title,
+      },
+      where: {
+        id,
+      },
+    });
+  },
 };
